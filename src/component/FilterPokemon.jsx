@@ -62,20 +62,27 @@ export const FilterPokemon = () => {
 
     return (
         <>  
-            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9 gap-5 m-10'>
-                {filteredPokemon.map((pokemon, index) => {
-                    // Get the type for the current Pokémon
-                    const typeColor = type;
-                    // Determine the background color class
-                    const bgColorClass = Color[typeColor];
-                    return (
-                        <div key={index} className={`${bgColorClass} flex flex-col items-center rounded hover:bg-stone-400`} onClick={() => nav(pokemon.name)}>
-                                <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
-                                <h2>{pokemon.name}</h2>
-                        </div>
-                     );
-                 })}
-            </div>
+            {
+                filteredPokemon.length === 0 ? (
+                    <p className='flex justify-center'>No Pokemon Available.</p>
+                ) : 
+                (
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9 gap-5 m-10'>
+                        {filteredPokemon.map((pokemon, index) => {
+                            // Get the type for the current Pokémon
+                            const typeColor = type;
+                            // Determine the background color class
+                            const bgColorClass = Color[typeColor];
+                            return (
+                                <div key={index} className={`${bgColorClass} flex flex-col items-center rounded hover:bg-stone-400`} onClick={() => nav(pokemon.name)}>
+                                        <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
+                                        <h2>{pokemon.name}</h2>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )
+            }
 
         </>
     );
